@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+	
+    <!-- set up urdf path -->
+    <arg name="model" default="$(find test_urdf)/urdf/sample_robot.xacro" />
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" ></node>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+
+    <!-- to start rviz if needed -->
+    <!-- <node name="rviz" pkg="rviz" type="rviz"/> -->
+	
+    <!-- Load a gazebo empty world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
+    <arg name="paused" value="false"/>
+    </include>
+
+    <!-- Spawn Urdf in Gazebo environment -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+     args="-urdf -model robot1 -param robot_description -z 0.05"/>
+	
+</launch>
