@@ -11,7 +11,7 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
 
     <!-- to start rviz if needed -->
-    <!-- <node name="rviz" pkg="rviz" type="rviz"/> -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find test_urdf)/test_urdf.rviz" /> 
 	
     <!-- Load a gazebo empty world -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch"> 

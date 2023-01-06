@@ -13,7 +13,7 @@
                </inertial>
   </xacro:macro>
 
-    <xacro:macro name="wheel_geometry">
+  <xacro:macro name="wheel_geometry">
     <geometry>
             <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
       </geometry>
@@ -45,7 +45,7 @@
     <color rgba="1.0 1.0 1.0 1.0"/>
   </material>
 
-    <link name="link_chassis">
+  <link name="link_chassis">
     <!-- pose and inertial -->
     <pose>0 0 0.1 0 0 0</pose>
     <inertial>
@@ -80,6 +80,93 @@
       </geometry>
     </visual>
   </link>
+
+  <!-- Revolute Joint on top of link chassis -->
+
+  <!--
+  <link name="rotate_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.3" radius="0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.3" radius="0.1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rotate_joint" type="continuous">
+    <parent link="link_chassis"/>
+    <child link="rotate_link"/>
+    <origin xyz="0 0 0.185" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <transmission name="rotate_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotate_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rotate_actuator">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1.0</mechanicalReduction>
+    </actuator>
+  </transmission> -->
+
+  <!-- ##################################### -->
+
+  <!-- Prismatic Joint on top of link chassis -->
+
+    <!--
+    <link name="prismatic_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1.0"/>
+        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.3" radius="0.1"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.3" radius="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="prismatic_joint" type="prismatic">
+      <axis xyz="0 0 1"/>
+      <parent link="link_chassis"/>
+      <child link="prismatic_link"/>
+      <limit effort="1000.0" lower="-0.38" upper="0" velocity="0.5"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.185"/>
+    </joint>
+
+    <transmission name="rotate_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="prismatic_joint">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="prismatic_actuator">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1.0</mechanicalReduction>
+      </actuator>
+    </transmission> -->
+
+  <!-- ##################################### -->
 
    <link name="link_right_wheel">
     <xacro:default_inertial mass="0.2"/>
