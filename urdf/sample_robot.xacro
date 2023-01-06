@@ -126,7 +126,7 @@
 
   <!-- Prismatic Joint on top of link chassis -->
 
-    <!--
+  <!--
     <link name="prismatic_link">
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -148,7 +148,7 @@
     </link>
 
     <joint name="prismatic_joint" type="prismatic">
-      <axis xyz="0 0 1"/>
+      <axis xyz="0 0 -1"/>
       <parent link="link_chassis"/>
       <child link="prismatic_link"/>
       <limit effort="1000.0" lower="-0.38" upper="0" velocity="0.5"/>
